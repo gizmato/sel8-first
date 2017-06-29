@@ -22,7 +22,6 @@ namespace sel8_first
             IeCapabilities.EnableNativeEvents = false;
             IeCapabilities.EnablePersistentHover = true;
             driver = new InternetExplorerDriver(IeCapabilities);
-            
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(50));
         }
 
