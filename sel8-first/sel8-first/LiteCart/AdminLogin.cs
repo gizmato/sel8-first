@@ -9,7 +9,7 @@ using OpenQA.Selenium.Remote;
 namespace sel8_first
 {
     [TestFixture]
-    public class CSharpSeleniumTest
+    public class AdminLogin
     {
         private IWebDriver driver;
         private WebDriverWait wait;
@@ -22,19 +22,18 @@ namespace sel8_first
             IeCapabilities.EnableNativeEvents = false;
             IeCapabilities.EnablePersistentHover = true;
             driver = new InternetExplorerDriver(IeCapabilities);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         [Test]
-        public void FirstTest()
+        public void LoginTest()
         {
-            driver.Url = "http://www.google.com/";
-            wait.Until(ExpectedConditions.TitleContains("Google"));
-            driver.FindElement(By.Name("q")).SendKeys("webdriver");
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.logocont a > img")));
-            driver.FindElement(By.CssSelector("button.sbico-c")).Click();
-            wait.Until(ExpectedConditions.TitleIs("webdriver - Поиск в Google"));
+            driver.Url = "http://localhost/litecart/admin/login.php";
+            wait.Until(ExpectedConditions.TitleContains("My Store"));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Name("username"))).SendKeys("admin");
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Name("password"))).SendKeys("admin");
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Name("login"))).Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("[title=\"Logout\"]")));
         }
 
         [TearDown]
